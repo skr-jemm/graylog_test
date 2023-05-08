@@ -1,0 +1,46 @@
+<configuration>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="GELF" class="de.siegmar.logbackgelf.GelfTcpAppender">
+        <graylogHost>54.187.63.254</graylogHost>
+        <graylogPort>12201</graylogPort>
+        <encoder class="de.siegmar.logbackgelf.GelfEncoder">
+            <originHost>localhost</originHost>
+            <staticField>app_name:JEMM_TEST_V2</staticField>
+            <staticField>os_arch:${os.arch}</staticField>
+            <staticField>os_name:${os.name}</staticField>
+            <staticField>os_version:${os.version}</staticField>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <file>/home/jorgeemm/IdeaProjects/temp/Log/logback.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!---
+    <appender name="ASYNC_GELF" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="GELF" />
+        <neverBlock>true</neverBlock>
+    </appender>-->
+
+    <logger name="temp-test">
+        <appender-ref ref="file"/>
+    </logger>
+
+
+    <root level="info">
+        <appender-ref ref="file" />
+        <appender-ref ref="GELF" />
+    </root>
+
+</configuration>
