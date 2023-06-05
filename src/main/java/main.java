@@ -9,13 +9,14 @@ import org.slf4j.LoggerFactory;
  * Version:
  */
 public class main {
-    private static Logger logger = LoggerFactory.getLogger(main.class);
     public static void main(String[] args) {
-        logger.info("Hola");
-        logger.info("Hola");
-        logger.info("Hola");
-        logger.info("Hola");
-        logger.error("Hola, esta es una prueba de jemm");
-        logger.error("Hola, esta es una prueba de jemm v2");
+        Environment.createInstance();
+
+        Environment.logMessage("generic","Prueba de loggeo de tipo INFO en el puerto: {12302}X");
+        Environment.logMessage("batch","Prueba de loggeo de tipo DEBUG en el puerto: {12303}Y");
+        //Environment.logMessage("batcho","Prueba de loggeo de tipo DEBUG en el puerto: {12303}C");
+        Environment.logMessage("audit","Prueba de loggeo de tipo WARN en el puerto: {12304}J");
+        Environment.logMessage("error","Prueba de loggeo de tipo ERROR en el puerto: {12305}R");
+
     }
 }
